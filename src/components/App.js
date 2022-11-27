@@ -16,14 +16,35 @@ function App() {
     .then((data) => setAllData(data));
   }, []);
 
-  function handleNew(data) {
-    const updatedData = allData.category.map((category) => {
-      category.product.map((product) => {
-        
+  function handleNewProduct(newProduct) {
+    const updatedProducts = allData.map((category) => {
+      category.products.map((product) => {
+        if (product.id === newProduct.id) {
+          return newProduct
+        }
+        else {
+          return product
+        }
       })
     })
+    setAllData(updatedProducts)
   }
 
+  function handleNewPrice(newPrice) {
+    const updatedPrices = allData.map((category) => {
+      category.products.map((product) => {
+        product.prices.map((price) => {
+          if (price.id === newPrice.id) {
+            return newPrice
+          }
+          else {
+            return product
+          }          
+        })
+      })
+    })
+    setAllData(updatedPrices)
+  }
 
   return (
     <div className="App">
@@ -33,7 +54,7 @@ function App() {
           <List allData={allData}/>
         </Route>
         <Route path="/form">   
-          <Form handleNew={handleNew} allData={allData}/>
+          <Form handleNewProduct={handleNewProduct} handleNewPrice={handleNewPrice} allData={allData}/>
         </Route>
       </Switch>
     </div>  
