@@ -2,7 +2,7 @@ import React from "react";
 import Product from "./Product"
 
 
-function List({allData}) {
+function List({allData, onDelete}) {
 
 
 
@@ -12,7 +12,7 @@ function List({allData}) {
           return (
             <div key={index}>
               <h1>{category.name}</h1>
-              {category.products.map((product, index) => <Product productInfo={product}/>)}
+              {category.products.map((product, index) => <Product productInfo={product} key={index} onDelete={onDelete}/>)}
             </div>
         )})}
       </div>

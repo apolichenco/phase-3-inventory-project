@@ -46,12 +46,19 @@ function App() {
     setAllData(updatedPrices)
   }
 
+  function handleDelete(id) {
+    const updatedProducts = allData.map((category) => {
+      category.filter((product) => product.id !== id)
+    })
+    setAllData(updatedProducts)
+  }
+
   return (
     <div className="App">
       <Header />   
       <Switch>
         <Route path="/list">      
-          <List allData={allData}/>
+          <List allData={allData} onDelete={handleDelete}/>
         </Route>
         <Route path="/form">   
           <Form handleNewProduct={handleNewProduct} handleNewPrice={handleNewPrice} allData={allData}/>
