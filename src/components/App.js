@@ -17,21 +17,23 @@ function App() {
   }, []);
 
   function handleNewProduct(newProduct) {
+    console.log(allData)
     const updatedProducts = allData.map((category) => {
-      category.products.map((product) => {
-        if (product.id === newProduct.id) {
-          return newProduct
-        }
-        else {
-          return product
-        }
-      })
+      if (category.id !== newProduct.category_id) {
+        return category
+      }
+      else {
+        category.products.push(newProduct)       
+        return category
+      }
     })
+    console.log(updatedProducts)
     setAllData(updatedProducts)
   }
 
   function handleNewPrice(newPrice) {
     const updatedPrices = allData.map((category) => {
+      if (category.id === newPrice.category_id)
       category.products.map((product) => {
         product.prices.map((price) => {
           if (price.id === newPrice.id) {
@@ -43,6 +45,7 @@ function App() {
         })
       })
     })
+    console.log(updatedPrices)
     setAllData(updatedPrices)
   }
 

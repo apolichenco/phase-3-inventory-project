@@ -17,6 +17,8 @@ function Product ({productInfo, onDelete, onEdit}) {
         setEditing(!editing)
       }
 
+      // console.log(productInfo)
+
     return (
         <div>
             {editing ? <h5>{productInfo.name}</h5> : <EditProduct name={productInfo.name} id={productInfo.id} onEdit={onEdit} trueEditing={setEditing}/> } 
@@ -26,12 +28,14 @@ function Product ({productInfo, onDelete, onEdit}) {
             <button onClick={handleEdit}>
             <span>✏️</span>
             </button>
-            {productInfo.prices.map((lastPrice, index) => {
-          if (index === productInfo.prices.length - 1)
-            return (
-                <Price priceInfo={lastPrice} sellForValue={productInfo.sell_for_value} key={index}/>
-          )
-        })}
+            {productInfo.prices ?
+            (productInfo.prices.map((lastPrice, index) => {
+                if (index === productInfo.prices.length - 1) {
+                  return (
+                    <Price priceInfo={lastPrice} sellForValue={productInfo.sell_for_value} key={index}/>
+                  )
+                }
+            })) : (null) }
         </div>
     )
       }
