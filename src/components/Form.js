@@ -1,47 +1,59 @@
 import React, {useState} from "react";
 
 
-function Form({handleNew, allData}) {
-  const [dropdownCategory, setDropdownCategory] = useState()
-  const [newProduct, setNewProduct] = useState()
-  const [newPrice, setNewPrice] = useState()
+function Form({handleNewProduct, handleNewPrice, allData}) {
+  const [dropdownCategory, setDropdownCategory] = useState(1)
+  const [newProductName, setNewProduct] = useState()
+  const [newPriceNumber, setNewPrice] = useState()
+  const [categoryId, setCategoryId] = useState(1)
+  const [productId, setProductId] = useState(1)
 
 
   function handleNewProduct(event) {
     setNewProduct(event.target.value)
-    console.log(event.target.value)
   }
 
   function handleNewPrice(event) {
     setNewPrice(event.target.value)
-    console.log(event.target.value)
+  }
+
+  function handleDropdownCategory(e) {
+    setDropdownCategory(e.target.value)
+  }
+
+  function handleCategoryId(e) {
+    setCategoryId(e.target.value)
+  }
+
+  function handleProductId(e) {
+    setProductId(e.target.value)
   }
 
    function handleSubmitProduct(e) {
     e.preventDefault()
+    const newProduct = {
+      name: newProductName,
+      category_id: parseInt(categoryId)
+    }
     console.log(newProduct)
-    // const newProduct = {
-    //   name: newProduct,
-    //   category_id:
-    // }
     // fetch("http://localhost:9292/products", {
-    //   method: "PATCH",
+    //   method: "POST",
     //   headers: {
     //     "Content-Type": "application/json",
     //   },
     //   body: JSON.stringify(newProduct)
     // })
     // .then((r) => r.json())
-    // .then((data) => handleNew(data))
+    // .then((data) => handleNewProduct(data))
    }
 
    function handleSubmitPrice(e) {
     e.preventDefault()
+    const newPrice = {
+      price: newPriceNumber,
+      product_id: parseInt(productId)
+    }
     console.log(newPrice)
-    // const newPrice = {
-    //   price: newPrice,
-    //   product_id: 
-    // }
     // fetch("http://localhost:9292/prices", {
     //   method: "POST",
     //   headers: {
@@ -50,25 +62,29 @@ function Form({handleNew, allData}) {
     //   body: JSON.stringify(newPrice)
     // })
     // .then((r) => r.json())
-    // .then((data) => handleNew(data))
+    // .then((data) => handleNewPrice(data))
    }
 
   return (
     <div>
       <form onSubmit={handleSubmitProduct}>
-        <select>
+        <select onChange={handleCategoryId}>
           {allData.map((category) => <option key={category.id} value={category.id}>{category.name}</option>)}
         </select><br></br>
         <label>New product</label><br></br>
           <input type="text" id="new-product" name="new-product" onChange={handleNewProduct}></input>
       </form>
       <form onSubmit={handleSubmitPrice}>
-      <select>
-          {allData.map((category) => <option key={category.id} value={category.id} onChange={(value) => setDropdownCategory(value)}>{category.name}</option>)}
-        </select><br></br>
-        {/* <select>
+      <select onChange={handleDropdownCategory}>
           {allData.map((category) => <option key={category.id} value={category.id}>{category.name}</option>)}
-        </select> */}
+        </select><br></br>
+        <select onChange={handleProductId}>
+          {allData.map((category) => {
+            if (category.id == dropdownCategory) {
+              return (category.products.map((product) => <option key={product.id} value={product.id}>{product.name}</option>))
+            }
+          })}
+        </select><br></br>
         <label>New price</label><br></br>
           <input type="text" id="new-price" name="new-price" onChange={handleNewPrice}></input> 
       </form>
