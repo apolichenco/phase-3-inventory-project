@@ -53,12 +53,16 @@ function App() {
     setAllData(updatedProducts)
   }
 
+  function handleEdit(id) {
+    console.log(id)
+  }
+
   return (
     <div className="App">
       <Header />   
       <Switch>
         <Route path="/list">      
-          <List allData={allData} onDelete={handleDelete}/>
+          <List allData={allData} onDelete={handleDelete} onEdit={handleEdit}/>
         </Route>
         <Route path="/form">   
           <Form handleNewProduct={handleNewProduct} handleNewPrice={handleNewPrice} allData={allData}/>
