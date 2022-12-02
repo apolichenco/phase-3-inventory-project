@@ -7,7 +7,7 @@ function Form({handleNewProduct, handleNewPrice, allData}) {
   const [newPriceNumber, setNewPrice] = useState()
   const [categoryId, setCategoryId] = useState(1)
   const [productId, setProductId] = useState(1)
-  const [newPriceOfProduct, setNewPriceOfProduct] = useState()
+  // const [newPriceOfProduct, setNewPriceOfProduct] = useState()
 
 
   function handleNewProductValue(event) {
@@ -38,8 +38,7 @@ function Form({handleNewProduct, handleNewPrice, allData}) {
     e.preventDefault()
     const newProduct = {
       name: newProductName,
-      category_id: parseInt(categoryId),
-      prices: []
+      category_id: parseInt(categoryId)
     }
     fetch("http://localhost:9292/products", {
       method: "POST",
@@ -49,25 +48,25 @@ function Form({handleNewProduct, handleNewPrice, allData}) {
       body: JSON.stringify(newProduct)
     })
     .then((r) => r.json())
-    .then((data) => console.log(data))
+    .then((data) => handleNewProduct(data))
    }
 
    function handleSubmitPrice(e) {
     e.preventDefault()
+    console.log(productId)
     const newPrice = {
       price: newPriceNumber,
       product_id: parseInt(productId)
     }
-    console.log(newPrice)
-    // fetch("http://localhost:9292/prices", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(newPrice)
-    // })
-    // .then((r) => r.json())
-    // .then((data) => handleNewPrice(data))
+    fetch("http://localhost:9292/prices", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newPrice)
+    })
+    .then((r) => r.json())
+    .then((data) => handleNewPrice(data, dropdownCategory))
    }
 
   return (
@@ -78,7 +77,7 @@ function Form({handleNewProduct, handleNewPrice, allData}) {
         </select><br></br>
         <label>New product</label><br></br>
           <input type="text" id="new-product" name="new-product" onChange={handleNewProductValue}></input>
-          {/* <input type="text" id="new-product" name="new-product" onChange={handleNewPriceOfProduct}></input> */}
+          <input type="submit" value="Save"/>
       </form>
       <form onSubmit={handleSubmitPrice}>
       <select onChange={handleDropdownCategory}>
@@ -86,13 +85,14 @@ function Form({handleNewProduct, handleNewPrice, allData}) {
         </select><br></br>
         <select onChange={handleProductId}>
           {allData.map((category) => {
-            if (category.id === dropdownCategory) {
+            if (category.id == dropdownCategory) {
               return (category.products.map((product) => <option key={product.id} value={product.id}>{product.name}</option>))
             }
           })}
         </select><br></br>
         <label>New price</label><br></br>
           <input type="text" id="new-price" name="new-price" onChange={handleNewPriceValue}></input> 
+          <input type="submit" value="Save"/>
       </form>
     </div>
   );

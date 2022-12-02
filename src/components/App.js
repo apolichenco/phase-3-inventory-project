@@ -17,35 +17,36 @@ function App() {
   }, []);
 
   function handleNewProduct(newProduct) {
-    console.log(allData)
     const updatedProducts = allData.map((category) => {
       if (category.id !== newProduct.category_id) {
         return category
       }
       else {
-        category.products.push(newProduct)       
-        return category
+        return category.products.push(newProduct)       
       }
     })
-    console.log(updatedProducts)
     setAllData(updatedProducts)
   }
 
-  function handleNewPrice(newPrice) {
+  function handleNewPrice(newPrice, categoryId) {    
     const updatedPrices = allData.map((category) => {
-      if (category.id === newPrice.category_id)
-      category.products.map((product) => {
-        product.prices.map((price) => {
-          if (price.id === newPrice.id) {
-            return newPrice
+      if (category.id !== parseInt(categoryId)) {
+        return category
+      }
+      else {
+        category.products.map((product) => {
+          if (product.id !== newPrice.product_id) {
+            return product
           }
           else {
-            return product
-          }          
+            const gain = newPrice.price * 0.3
+            product.sell_for_value = gain + newPrice.price
+            return product.prices.push(newPrice)
+          }
         })
-      })
+        return category
+      }
     })
-    console.log(updatedPrices)
     setAllData(updatedPrices)
   }
 

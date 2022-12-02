@@ -12,7 +12,10 @@ function List({allData, onDelete, onEdit}) {
           return (
             <div key={index}>
               <h1>{category.name}</h1>
-              {category.products.map((product, index) => <Product productInfo={product} key={index} onDelete={onDelete} onEdit={onEdit}/>)}
+              {category.products.map((product, index) => {
+                return (
+                <Product productInfo={product} key={index} onDelete={onDelete} onEdit={onEdit}/>
+              )})}
             </div>
         )})}
       </div>

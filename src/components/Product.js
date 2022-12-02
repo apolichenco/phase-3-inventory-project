@@ -13,11 +13,8 @@ function Product ({productInfo, onDelete, onEdit}) {
       }
     
       function handleEdit() {
-        console.log("Edit")
         setEditing(!editing)
       }
-
-      // console.log(productInfo)
 
     return (
         <div>
