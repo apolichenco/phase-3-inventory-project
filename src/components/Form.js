@@ -7,8 +7,6 @@ function Form({handleNewProduct, handleNewPrice, allData}) {
   const [newPriceNumber, setNewPrice] = useState()
   const [categoryId, setCategoryId] = useState(1)
   const [productId, setProductId] = useState(1)
-  // const [newPriceOfProduct, setNewPriceOfProduct] = useState()
-
 
   function handleNewProductValue(event) {
     setNewProduct(event.target.value)
@@ -30,10 +28,6 @@ function Form({handleNewProduct, handleNewPrice, allData}) {
     setProductId(e.target.value)
   }
 
-  // function handleNewPriceOfProduct(e) {
-  //   setNewPriceOfProduct(e.target.value)
-  // }
-
    function handleSubmitProduct(e) {
     e.preventDefault()
     const newProduct = {
@@ -53,7 +47,6 @@ function Form({handleNewProduct, handleNewPrice, allData}) {
 
    function handleSubmitPrice(e) {
     e.preventDefault()
-    console.log(productId)
     const newPrice = {
       price: newPriceNumber,
       product_id: parseInt(productId)

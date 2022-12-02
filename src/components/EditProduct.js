@@ -16,7 +16,7 @@ function EditProduct({name, id, onEdit, trueEditing}) {
             }),
         })
         .then((r) => r.json())
-        .then((updatedProduct) => console.log(updatedProduct))
+        .then((updatedProduct) => onEdit(updatedProduct))
         trueEditing(true)
     }
     

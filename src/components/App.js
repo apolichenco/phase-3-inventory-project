@@ -6,9 +6,6 @@ import List from './List';
 
 function App() {
   const [allData, setAllData] = useState([])
-  // const [category, setCategory] = useState([])
-  // const [products, setProducts] = useState([])
-  // const [prices, setPrices] = useState([])
 
   useEffect(() => {
     fetch("http://localhost:9292/categories")
@@ -19,10 +16,13 @@ function App() {
   function handleNewProduct(newProduct) {
     const updatedProducts = allData.map((category) => {
       if (category.id !== newProduct.category_id) {
+        console.log("HI")
         return category
       }
       else {
-        return category.products.push(newProduct)       
+        console.log("HI")
+        category.products.push(newProduct) 
+        return category      
       }
     })
     setAllData(updatedProducts)
@@ -41,7 +41,8 @@ function App() {
           else {
             const gain = newPrice.price * 0.3
             product.sell_for_value = gain + newPrice.price
-            return product.prices.push(newPrice)
+            product.prices.push(newPrice)
+            return product
           }
         })
         return category
@@ -57,8 +58,26 @@ function App() {
     setAllData(updatedProducts)
   }
 
-  function handleEdit(id) {
-    console.log(id)
+  function handleEdit(updatedProduct) {
+    const editedProducts = allData.map((category) => {
+      if (category.id !== updatedProduct.category_id) {
+        return category
+      }
+      else {
+        category.products.map((product) => {
+          if (product.id !== updatedProduct.id) {
+            return product
+          }
+          else {
+            product.name = updatedProduct.name
+            console.log(product)
+            return product
+          }
+        })
+        return category
+      }
+    })
+    setAllData(editedProducts)
   }
 
   return (

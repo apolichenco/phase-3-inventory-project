@@ -4,8 +4,6 @@ import Product from "./Product"
 
 function List({allData, onDelete, onEdit}) {
 
-
-
   return (
       <div>
         {allData.map((category, index) => {
