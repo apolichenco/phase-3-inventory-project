@@ -4,6 +4,8 @@ import EditProduct from "./EditProduct"
 
 function Product ({productInfo, onDelete, onEdit}) {
     const [editing, setEditing] = useState(true)
+    const [priceList, setPriceList] = useState([])
+    const [showList, setShowList] = useState(true)
 
     function handleDelete() {
         fetch(`http://localhost:9292/products/${productInfo.id}`, {
@@ -16,6 +18,18 @@ function Product ({productInfo, onDelete, onEdit}) {
         setEditing(!editing)
       }
 
+      function handlePriceList() {
+        setShowList(!showList)
+        if (showList) {
+          fetch(`http://localhost:9292/products/${productInfo.id}/prices`)
+          .then((r) => r.json())
+          .then((data) => setPriceList(data))
+        }
+        else {
+          setPriceList([])
+        }
+      }
+
     return (
         <div>
             {editing ? <h5>{productInfo.name}</h5> : <EditProduct name={productInfo.name} id={productInfo.id} onEdit={onEdit} trueEditing={setEditing}/> } 
@@ -25,14 +39,21 @@ function Product ({productInfo, onDelete, onEdit}) {
             <button onClick={handleEdit}>
             <span>✏️</span>
             </button>
-            {productInfo.prices ?
-            (productInfo.prices.map((lastPrice, index) => {
-                if (index === productInfo.prices.length - 1) {
-                  return (
-                    <Price priceInfo={lastPrice} sellForValue={productInfo.sell_for_value} key={index}/>
-                  )
-                }
-            })) : (null) }
+            <button onClick={handlePriceList}>
+            <span>💹</span>
+            </button>
+            {
+            // productInfo.prices ?
+            // (productInfo.products.map((product, index) => 
+                    <Price price={productInfo.last_priced} sellForValue={productInfo.sell_for_value} key={productInfo.id}/>
+            // ))
+            //  : (null) 
+            }
+            {showList ? (null) : (
+            <ul>
+              {priceList.map((indPrice, index) => <li key={index}>{indPrice.price}</li>)}
+              </ul>
+              )}
         </div>
     )
       }

@@ -6,6 +6,7 @@ import List from './List';
 
 function App() {
   const [allData, setAllData] = useState([])
+  const [sellForValue, setSellForValue] = useState()
 
   useEffect(() => {
     fetch("http://localhost:9292/categories")
@@ -16,11 +17,9 @@ function App() {
   function handleNewProduct(newProduct) {
     const updatedProducts = allData.map((category) => {
       if (category.id !== newProduct.category_id) {
-        console.log("HI")
         return category
       }
       else {
-        console.log("HI")
         category.products.push(newProduct) 
         return category      
       }
@@ -29,6 +28,7 @@ function App() {
   }
 
   function handleNewPrice(newPrice, categoryId) {    
+    console.log(newPrice)
     const updatedPrices = allData.map((category) => {
       if (category.id !== parseInt(categoryId)) {
         return category
@@ -53,7 +53,7 @@ function App() {
 
   function handleDelete(id) {
     const updatedProducts = allData.map((category) => {
-      category.filter((product) => product.id !== id)
+      category.products.filter((product) => product.id !== id)
     })
     setAllData(updatedProducts)
   }
@@ -70,7 +70,6 @@ function App() {
           }
           else {
             product.name = updatedProduct.name
-            console.log(product)
             return product
           }
         })
