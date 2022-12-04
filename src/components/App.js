@@ -28,7 +28,6 @@ function App() {
   }
 
   function handleNewPrice(newPrice, categoryId) {    
-    console.log(newPrice)
     const updatedPrices = allData.map((category) => {
       if (category.id !== parseInt(categoryId)) {
         return category
@@ -39,9 +38,10 @@ function App() {
             return product
           }
           else {
-            const gain = newPrice.price * 0.3
+            const number = newPrice.price * 0.3
+            const gain = Math.round(number * 100.0) / 100.0
             product.sell_for_value = gain + newPrice.price
-            product.prices.push(newPrice)
+            product.last_priced = newPrice.price
             return product
           }
         })
@@ -51,9 +51,16 @@ function App() {
     setAllData(updatedPrices)
   }
 
-  function handleDelete(id) {
+  function handleDelete(productInfo) {
     const updatedProducts = allData.map((category) => {
-      category.products.filter((product) => product.id !== id)
+      if (category.id !== productInfo.category_id) {
+        return category
+      }
+      else {
+        const updatedProductList = category.products.filter((product) => product.id !== productInfo.id) 
+        category.products = updatedProductList
+        return category
+      }
     })
     setAllData(updatedProducts)
   }

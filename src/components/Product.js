@@ -11,7 +11,7 @@ function Product ({productInfo, onDelete, onEdit}) {
         fetch(`http://localhost:9292/products/${productInfo.id}`, {
             method: "DELETE",
         })
-        onDelete(productInfo.id)
+        onDelete(productInfo)
       }
     
       function handleEdit() {
