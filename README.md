@@ -12,20 +12,14 @@ This page is for businesses to manage their inventory and check it's prices.
 
 
 ### Requirements
-*To be able to connect to the db.json
+* Connect to https://github.com/apolichenco/phase-3-project-November
 
 ### Installation Instructions
-* Fork and install from github
-* Run nmp install in the terminal
-* Run json.server for db.json (json-server --watch db.json)
-* Run npm start in your terminal , and press y to allow another port to open up
-* Everything should show up
+* Upload the above github link for the backend
+* Start a server, and plant seed data if you want
+* Make sure your localhost matches the server
+* Open this directory and enjoy adding your products and prices
 
 ### Problems
-* I still have to work on styling
-* Want to add candle lighting times
-* Add a form to get candle loghting times based on written location
-
-### Licensing
-* I used the following website: 
-        www.hebcal.com
+* Want to show the date ordered when I fetch the price list for a product
+* Add a date to any new price
