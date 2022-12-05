@@ -42,16 +42,10 @@ function Product ({productInfo, onDelete, onEdit}) {
             <button onClick={handlePriceList}>
             <span>💹</span>
             </button>
-            {
-            // productInfo.prices ?
-            // (productInfo.products.map((product, index) => 
-                    <Price price={productInfo.last_priced} sellForValue={productInfo.sell_for_value} key={productInfo.id}/>
-            // ))
-            //  : (null) 
-            }
+            {<Price price={productInfo.last_priced} sellForValue={productInfo.sell_for_value} key={productInfo.id}/>}
             {showList ? (null) : (
             <ul>
-              {priceList.map((indPrice, index) => <li key={index}>{indPrice.price}</li>)}
+              {priceList.map((indPrice, index) => <li key={index}>${indPrice.price}</li>)}
               </ul>
               )}
         </div>

@@ -39,8 +39,8 @@ function App() {
           }
           else {
             const number = newPrice.price * 0.3
-            const gain = Math.round(number * 100.0) / 100.0
-            product.sell_for_value = gain + newPrice.price
+            const gain = number + newPrice.price
+            product.sell_for_value = Math.round(gain * 100.0) / 100.0
             product.last_priced = newPrice.price
             return product
           }
