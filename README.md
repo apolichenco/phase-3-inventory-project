@@ -1,4 +1,5 @@
 # Inventory List
+
 ### Overview of project
 This page is for businesses to manage their inventory and check it's prices.
 
