@@ -6,7 +6,6 @@ import List from './List';
 
 function App() {
   const [allData, setAllData] = useState([])
-  const [sellForValue, setSellForValue] = useState()
 
   useEffect(() => {
     fetch("http://localhost:9292/categories")
