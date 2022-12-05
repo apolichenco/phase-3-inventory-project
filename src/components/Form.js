@@ -66,7 +66,7 @@ function Form({handleNewProduct, handleNewPrice, allData}) {
     <div>
       <form onSubmit={handleSubmitProduct}>
         <select onChange={handleCategoryId}>
-          {allData.map((category, index) => <option key={index} value={index + 1}>{category.name}</option>)}
+          {allData.map((category, index) => <option key={index} value={category.id}>{category.name}</option>)}
         </select><br></br>
         <label>New product</label><br></br>
           <input type="text" id="new-product" name="new-product" onChange={handleNewProductValue}></input>

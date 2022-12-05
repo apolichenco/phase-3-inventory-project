@@ -3,10 +3,6 @@ import React, {useState} from "react";
 
 function Price({price, sellForValue}) {
 
-    // const gain = priceInfo.price * 0.3
-    // const number = gain + priceInfo.price
-    // const sellForValue = Math.round(number * 100.0) / 100.0
-
 
     return (
         <div>
