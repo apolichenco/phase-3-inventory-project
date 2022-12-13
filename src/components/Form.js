@@ -6,7 +6,7 @@ function Form({handleNewProduct, handleNewPrice, allData}) {
   const [newProductName, setNewProduct] = useState()
   const [newPriceNumber, setNewPrice] = useState()
   const [categoryId, setCategoryId] = useState(1)
-  const [productId, setProductId] = useState(1)
+  const [productId, setProductId] = useState(allData[0].products[0].id)
 
   function handleNewProductValue(event) {
     setNewProduct(event.target.value)
